@@ -1,0 +1,100 @@
+
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="display-4 text-center">{{regionName}}</h4>
+        </div>
+        <div class="card-body row">
+            <div class="col-4">
+                <span><b>Name:</b> {{regionName}}</span>
+            </div>
+            <div class="col-4">
+                <span><b>Total Population :</b> {{totalPopulation}}</span>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+
+    <div class="row">
+
+        <div class="col-12">
+            <h5 class="text-center">Countries</h5><br>
+
+            <div class="row">
+                <div class="col-4">
+                  <input type="text" class="form-control" [(ngModel)]='searchRegion' placeholder="Search country by name" >
+                </div>
+              </div>
+              <br>
+            <table class="table table-bordered">
+                <thead>
+                    <th scope="col" (click)="setRegionOrder('id')"># <i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="setRegionOrder('name')">Name <i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="setRegionOrder('capital')">Capital <i class="fa fa-fw fa-sort"></i></th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let i = index let country of regionInfo | filterAll: searchRegion | orderBy: orderRegion:reverseRegion | paginate: {id:'countryPagination',itemsPerPage:7,currentPage:countryPaginator}">
+                        <td>{{i + 1}}</td>
+                        <td>
+                            <a (click)='goToCountry(country.name)'>{{country.name}}</a>
+                        </td>
+                        <td>{{country.capital}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <div class="row">
+                        <div class="col-9">
+                            <pagination-controls id="countryPagination" (pageChange)="countryPaginator = $event"></pagination-controls>
+                        </div>
+                        <div class="col-3">
+                            <span class="padding-5">Total Entries : {{regionInfo.length}}</span>
+                        </div>
+                    </div>
+                    
+                </tfoot>
+            </table>
+        </div>
+
+       
+
+        <div class="col-12">
+            <h5 class="text-center">Sub Regions</h5><br>
+            <!-- <div class="row">
+                <div class="col-4">
+                  <input type="text" class="form-control" [(ngModel)]='searchSubRegion' placeholder="Search sub region by name" >
+                </div>
+              </div>
+              <br> -->
+            <table class="table table-bordered">
+                <thead>
+                    <th scope="col" (click)="setSubRegionOrder('id')"># <i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="setSubRegionOrder('name')">Name <i class="fa fa-fw fa-sort"></i></th>
+                </thead>    
+                <tbody>
+                    <tr *ngFor="let i = index let name of subRegionsOfRegion | orderBy: orderSubRegion:reverseSubRegion | paginate:{id:'subRegionPagination',itemsPerPage:5,currentPage:subRegionPaginator}">
+                        <td>{{i + 1}}</td>
+                        <td><a (click)='goToSpecificSubRegion(name)'>{{name}}</a></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <div class="row">
+                        <div class="col-9">
+                            <pagination-controls id="subRegionPagination" (pageChange)="subRegionPaginator = $event"></pagination-controls>
+                        </div>
+                        <div class="col-3">
+                            <span class="padding-5">Total Entries : {{subRegionsOfRegion.length}}</span>
+                        </div>
+                    </div>
+                    
+                </tfoot>
+            </table>
+        </div>
+
+
+
+    </div>
+
+</div>

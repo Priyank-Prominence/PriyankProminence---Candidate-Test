@@ -1,0 +1,7 @@
+﻿@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnv
+@using System.IO;
+@{
+    ViewData["Title"] = "Prominence";
+    Layout = null;
+}
+@Html.Raw(File.ReadAllText("wwwroot/dist/index.html"))

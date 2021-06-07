@@ -1,0 +1,53 @@
+<div class="jumbotron">
+    <h4 class="display-4 text-center">Countries</h4>
+</div>
+
+<div class="container">
+
+    <div class="row">
+      <div class="col-4">
+        <input type="text" class="form-control" [(ngModel)]='search' placeholder="Search country by name" >
+      </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col" (click)="setOrder('id')"># <i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="setOrder('name')">Name <i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="setOrder('region')">Region <i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)="setOrder('subregion')">Subregion <i class="fa fa-fw fa-sort"></i></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let i = index let country of countriesList| filterAll: search | orderBy: order:reverse | paginate: {itemsPerPage:7,currentPage:paginator} ">
+                    <th>{{ i + 1 }}</th>
+                    <td >
+                      <a (click)='goTocountry(country.name)'>{{country.name}}</a>
+                    </td>
+                    <td>
+                      <a (click)='goToRegion(country.region)'>{{country.region}}</a>
+                    </td>
+                    <td>
+                      <a (click)='goToSubRegion(country.subregion)'>{{country.subregion}}</a>
+                    </td>
+                   
+                  </tr>
+                </tbody>
+                <tfoot>
+                    <div class="row">
+                      <div class="col-9">
+                        <pagination-controls (pageChange)="paginator = $event"></pagination-controls>
+                      </div>
+                      <div class="col-3">
+                          <span class="padding-5">Total Entries : {{countriesList.length}}</span>
+                      </div>
+                    </div>
+                </tfoot>
+              </table>
+        </div>
+    </div>
+
+</div>

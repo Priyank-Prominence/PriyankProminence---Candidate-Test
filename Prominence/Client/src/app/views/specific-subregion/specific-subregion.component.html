@@ -1,0 +1,64 @@
+
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="display-4 text-center">{{subRegionName}}</h4>
+        </div>
+        <div class="card-body row">
+            <div class="col-4">
+                <span><b>Name:</b> {{subRegionName}}</span>
+            </div>
+            <div class="col-4">
+                <span><b>Total Population :</b> {{totalPopulation}}</span>
+            </div>
+            <div class="col-4">
+                <span><b>Region :</b> <a (click)='goToSpecificRegion(regionName)'>{{regionName}}</a></span>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+
+    <div class="row">
+
+        <div class="col-12">
+            <h5 class="text-center">Countries</h5><br>
+            <div class="row">
+                <div class="col-4">
+                  <input type="text" class="form-control" [(ngModel)]='search' placeholder="Search country by name" >
+                </div>
+              </div>
+              <br>
+            <table class="table table-bordered">
+                <thead> 
+                    <th scope="col" (click)='setOrder("id")'># <i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)='setOrder("name")'>Name <i class="fa fa-fw fa-sort"></i></th>
+                    <th scope="col" (click)='setOrder("capital")'>Capital <i class="fa fa-fw fa-sort"></i></th>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let i = index let country of subRegionInfo |filterAll:search | orderBy: order:reverse | paginate: {id:"countryPagination",itemsPerPage:7,currentPage:countryPaginator}'>
+                        <td>{{i + 1}}</td>
+                        <td>
+                            <a (click)='goToCountry(country.name)'>{{country.name}}</a>
+                        </td>
+                        <td>{{country.capital}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <div class="row">
+                        <div class="col-9">
+                            <pagination-controls id="countryPagination" (pageChange)="countryPaginator = $event"></pagination-controls>
+                        </div>
+                        <div class="col-3">
+                            <span class="padding-5">Total Entries : {{subRegionInfo.length}}</span>
+                        </div>
+                    </div>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+</div>

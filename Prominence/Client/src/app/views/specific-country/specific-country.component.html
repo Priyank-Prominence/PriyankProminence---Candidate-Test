@@ -1,0 +1,83 @@
+
+<div class="container">
+    <br>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="display-4 text-center">{{countryInfo.name}}</h4>
+        </div>
+        <div class="card-body row">
+            <div class="col-4">
+                <span><b>Name:</b> {{countryInfo.name}}</span>
+            </div>
+            <div class="col-4">
+                <span><b>Capital:</b> {{countryInfo.capital}}</span>
+            </div>
+            <div class="col-4">
+                <span><b>Total Population :</b> {{countryInfo.population}}</span>
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+
+
+    <div class="row">
+
+        <div class="col-4">
+            <h5>Official currencies</h5><br>
+            <table class="table table-bordered">
+                <thead>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Symbol</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let curr of countryInfo.currencies let i = index'>
+                        <td>{{i + 1}}</td>
+                        <td>{{curr.name}}</td>
+                        <td>{{curr.symbol}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-4">
+            <h5>Official languages</h5><br>
+            <table class="table table-bordered">
+                <thead>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Native Name</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let lang of countryInfo.languages let i = index'>
+                        <td>{{i + 1}}</td>
+                        <td>{{lang.name}}</td>
+                        <td>{{lang.nativeName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-4">
+            <h5>Neighbor countries</h5><br>
+            <table class="table table-bordered">
+                <thead>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let country of countryInfo.borders let i = index'>
+                        <td>{{i + 1}}</td>
+                        <td><a (click)='goToCountry(country)'>{{country}}</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+    </div>
+
+</div>
